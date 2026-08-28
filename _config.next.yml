@@ -1,0 +1,47 @@
+# NexT 主题配置（对齐 liurui.live 原站样式）
+# 完整可配置项见 node_modules/hexo-theme-next/_config.yml
+
+scheme: Gemini
+
+# 菜单（原站有 标签/分类/归档/关于）
+menu:
+  home: / || fa fa-home
+  tags: /tags/ || fa fa-tags
+  categories: /categories/ || fa fa-th
+  archives: /archives/ || fa fa-archive
+  about: /about/ || fa fa-user
+
+# 头像与动效（原站 use-motion）
+motion:
+  enable: true
+  async: false
+  transition:
+    post_block: fadeIn
+    post_header: fadeInDown
+    post_body: fadeInDown
+    coll_header: fadeInUp
+
+# 本地搜索（原站有搜索，基于 search.xml）
+local_search:
+  enable: true
+  trigger: auto
+  top_n_per_article: 1
+  unescape: false
+  preload: false
+
+# 代码高亮主题
+codeblock:
+  theme:
+    light: default
+    dark: default
+  copy_button:
+    enable: false
+
+footer:
+  # 底部显示 powered by Hexo / theme NexT（与原站 footer 一致）
+  powered:
+    enable: true
+    version: true
+  theme:
+    enable: true
+    version: true

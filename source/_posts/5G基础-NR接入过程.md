@@ -4,7 +4,7 @@ date: 2021-04-29 00:52:43
 ---
 
 UE的接入无线承载网的过程，分为初始接入和随机接入两个过程；以下是NR SA的场景下的通过空口在UE和NW（网络）之间信令流程：
-![image](http://1.116.145.136/NR/Initial_Attach_Sequence.png)
+![image](/images/NR/Initial_Attach_Sequence.png)
 
 ##### [](#1-初始接入)1. [初始接入](#初始接入)
 

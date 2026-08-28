@@ -11,17 +11,17 @@ PDSCH调制阶数通过DCI中5bit的字段`I_MCS`来指数，5bit最大32，协�
 **case1**： 高层配置PDSCH-config种使用**qam256**的mcs表，那么对DCI1_1指示的PDSCH使用**Table 5.1.3.1-2**来确定MCS和码率，也就是256qam的表格。
 
 **case2**： 如果UE没有通过SPS-config来配置mcs表，而是通过pdsch-config配置了成**qam256**，那么UE使用**Table 5.1.3.1-2**来确定MCS和码率，也就是256qam的表格。
-![pdsch_mcsTable2](http://1.116.145.136/NR/pdsch_mcsTable2.png)
+![pdsch_mcsTable2](/images/NR/pdsch_mcsTable2.png)
 
 **case3**： 如果UE没有配置MCS-C-RNTI，且高曾参数pdsch-config种配置的mcs表是**qam64LowSE**，那么针对UE USS 搜索空间的对应的PDSCH调度使用**Table 5.1.3.1-3**来确定MCS和码率，也就是低码率的64qam的表格。
 
 **case4**： 如果UE配置了MCS-C-RNTI，pdsch是被MCS-C-RNTI加扰的PDCCH指示调度，那么UE使用**Table 5.1.3.1-3**来确定MCS和码率；
 
 **case5**： 如果UE的mcs表通过SPS-Config配置并且配置成**qam64LowSE**，那么UE使用**Table 5.1.3.1-3**来确定MCS和码率；
-![pdsch_mcsTable3](http://1.116.145.136/NR/pdsch_mcsTable3.png)
+![pdsch_mcsTable3](/images/NR/pdsch_mcsTable3.png)
 
 **case6**：除了上述5种情况外，使用**Table 5.1.3.1-1**；
-![pdsch_mcsTable1](http://1.116.145.136/NR/pdsch_mcsTable1.png)从上述的mcs表种可以看出，当mcs确定之后相应的传输码率就确定了。因此码率是通过mcs查表间接确认得到的。
+![pdsch_mcsTable1](/images/NR/pdsch_mcsTable1.png)从上述的mcs表种可以看出，当mcs确定之后相应的传输码率就确定了。因此码率是通过mcs查表间接确认得到的。
 
 ##### [](#2-TBsize的计算和RB预估)2. [TBsize的计算和RB预估](TBsize的计算和RB预估)
 
@@ -59,7 +59,7 @@ N^{‘}*{info} = max(24, 2^{n}*⌊\frac{N*{info}}{2^n} ⌋)，其中 n = max(3, 
 \end{eqnarray}
 $$
 通过量化公式获得的`N_'_info`在Table 5.1.3.2-1中查找不小于他的最接近的值，比如算出来的量化值是606，那么通过查表就获得的TB-Size就是608；
-![tbs_low_3824](http://1.116.145.136/NR/tbs_low_3824.png)
+![tbs_low_3824](/images/NR/tbs_low_3824.png)
 
 - `N_info` > 3824 :
 
@@ -90,7 +90,7 @@ TBS = 8*C* (\frac{N^{‘}_{info}+24}{8})-24
 \end{eqnarray}
 $$
 需要注意的是：**(1)** 当调度PDSCH的PDCCH是通过SI-RNTI加扰的话，也就是传输sib1消息时，TB-Size的大小不能超过2976，因为sib1只能通过qpsk的调制方式发送；**(2)** 当调度的DCI是P-RNTI、RA-RNTI加扰的时候，在信息量N_info计算时需要带上一个缩放因子，具体如下图所示：
-![tbs_Scaling_factor](http://1.116.145.136/NR/tbs_Scaling_factor.png)
+![tbs_Scaling_factor](/images/NR/tbs_Scaling_factor.png)
 那么新的`N_info`计算公式就编程如下的样子：
 $$
 \begin{equation}
@@ -111,7 +111,7 @@ N_prb是传递这些数据量需要的RB数，N_re是每个RB中有效的RE数�
 > 
 PDSCH DMRS : NR中定义了两种DMRS type，分别是type1和type2，在这两种type中，有1符号或者2符号的DMRS，除此之外还可以配置额外的附加导频的DMRS。
 
-![pdsch_pusch_type](http://1.116.145.136/NR/pdsch_pusch_type.png)
+![pdsch_pusch_type](/images/NR/pdsch_pusch_type.png)
 
 - 
 PDSCH DMRS Type A ：固定在第三或(pos2)者第四(pos3)个符号上，无论PDSCH的起始符号是多少，最小资源组是一个RE；

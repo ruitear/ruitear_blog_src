@@ -11,17 +11,17 @@ SR是UE的调度请求，用在UE像基站申请上行数据的新传调度,通�
 ##### [](#2-SR的配置)2. SR的配置
 
 在基站中SR的配置在SchedulingRequestResourceId IE中定义了SR资源的数量，最大8个SR资源，对应的SchedulingRequestResourceId就是0-7 ；
-![SchedulingRequestId](http://1.116.145.136/NR/SchedulingRequestId_0.png)
+![SchedulingRequestId](/images/NR/SchedulingRequestId_0.png)
 MAC的配置中， 逻辑信道可以分别关联SR配置，一个MAC实体可以配置0个、1个或者多个SR配置，不同的逻辑信道可以关联相同的schedulingRequestID，**如果没有给相应的逻辑信道配置SR**，当该逻辑信道有数据发送时只能通过随机接入获得上行调度。
 一个mac实体通过MAC-CellGroupConfig->**schedulingRequestConfig**->schedulingRequestToAddModList配置一个SR列表。其中每个SR配置对应一个schedulingRequestConfig；
-![SchedulingRequestConfig](http://1.116.145.136/NR/SchedulingRequestConfig.jpg)
+![SchedulingRequestConfig](/images/NR/SchedulingRequestConfig.png)
 
 一个SR配置(SchedulingRequestConfig)包含了分布在不同bwp或者小区中用于传输SR的一组PUCCH资源，也就是SR资源，目前SR只支持PUCCH format0或者PUCCH format1. 从协议38.331的描述可以看到一个SchedulingRequestConfig中对应一组SchedulingRequestResourceConfig，也就是一个SR配置可以对应多个SR资源，他们实际使用是分布在不同的小区或者BWP上。在特定逻辑信道上，每个BWP最多配置1个用于SR的PUCCH资源。
 
 上行BWP通过BWP-UplinkDedicated->pucch-Config->schedulingRequestResourceToAddModList配置一个SR资源表，每个SR资源对应一个SchedulingRequestResourceConfig，这个SR资源有一个schedulingRequestID指示它被哪个SR配置使用，**schedulingRequestID** 是区分不同的SR配置的唯一值，关联了**sr-ProhibitTimer**和**sr-TransMax**。通过BWP与小区的对应关系，可以确定一个SR配置在特定小区的特定上行BWP上使用的SR资源。
 
 **在pucch-config中为各个上行bwp配置了sr资源**，**使用schedulingRequestResourceId来区分不同的资源配置**，schedulingRequestResourceId会关联schedulingRequestID，还包括SR发送时间点配置，以及对应的pucch resource配置。
-![SchedulingRequestResourceId](http://1.116.145.136/NR/pucch_config.png)
+![SchedulingRequestResourceId](/images/NR/pucch_config.png)
 
 下图是SR在接入过程的对逻辑信道的配置的示例，信令中对SRB1/SRB2/DRB都配置了响应的相同的SR资源。
 
@@ -30,8 +30,8 @@ MAC的配置中， 逻辑信道可以分别关联SR配置，一个MAC实体可�
 ##### [](#3-SR的发送)3. SR的发送
 
 针对每个SR资源，基站通过**SchedulingRequestResourceConfig->resource**告诉UE使用PUCCH format0还是 format1来发送SR。
-![SchedulingRequestConfig](http://1.116.145.136/NR/SchedulingRequestResourceConfig.png)
-![SchedulingRequestId](http://1.116.145.136/NR/SchedulingRequestId_1.png)
+![SchedulingRequestConfig](/images/NR/SchedulingRequestResourceConfig.png)
+![SchedulingRequestId](/images/NR/SchedulingRequestId_1.png)
 
 在SchedulingRequestResourceConfig中的**periodicityAndOffSet**字段指定传送SR的PUCCH资源的周期,以符号或者slot为单位，确定了SR的发送时间位置[TS38.331 9.2.4]。可以看到SR的最小周期是2符号。
 基于SR周期的差异，把SR对应三种场景来，如下图case所示：
